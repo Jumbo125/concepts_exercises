@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Exercise Tests</title>
+    <style>
+        body { font-family: Consolas, monospace; background: #1e1e1e; color: #ddd; padding: 16px; }
+        .pass { color: #6c6; }
+        .fail { color: #f66; }
+        .todo { color: #cc6; }
+    </style>
+</head>
+<body>
+    <pre id="output"></pre>
+    <script>
+        // Show console.log output on the page as well (no need for Node.js).
+        const output = document.getElementById("output");
+        const originalLog = console.log;
+        console.log = function (text) {
+            originalLog(text);
+            const line = document.createElement("div");
+            line.textContent = text;
+            if (text.startsWith("[PASS]")) line.className = "pass";
+            if (text.startsWith("[FAIL]")) line.className = "fail";
+            if (text.startsWith("[TODO]")) line.className = "todo";
+            output.appendChild(line);
+        };
+        window.onerror = function (message, source, lineNumber) {
+            console.log("ERROR in " + source + " line " + lineNumber + ": " + message);
+        };
+    </script>
+    <!-- Teachers: change this to solutions.js to check the reference solutions. -->
+    <script src="exercises.js"></script>
+</body>
+</html>
