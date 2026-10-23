@@ -24,22 +24,44 @@
 // An empty array gives 0.
 //   sumOfEvens([1, 2, 3, 4]) -> 6
 // ---------------------------------------------------------------------
+
+/* ########## MY OWN DEBUGGING ## */
+const my_debug = true;
+function show_debug (exercise_txt){
+    if (my_debug){
+    console.log(exercise_txt);
+    }
+}
+
+/* ############################## */
 function sumOfEvens(numbers) {
-  //sum variable deklarieren
-  //falls eingabe kein array ist oder leer ist, wird 0 zurueckgegeben
+  /*    ######### sum variable declaration
+        ######### if input isn't a variable, use 0
+        ######## count how many even numbers inside of array, for console.log warning
+  */
   let sum = 0;
+  let count_of_even_numbers = 0;
+  show_debug("INFO [--Exercise 1--]: INPUT ARRAY: " + numbers);
   if (Array.isArray(numbers)) {
     if (numbers.length < 1) {
       //falls arra nur einen eintrag enthaelt, diesen retour geben
       //wertuebergabe nicht zusaetzlich notwendig,da die anschließende for-schleife den sten WErt vom Array einfach beibehaelt
-      console.log("Array entält nur eine zahl");
+      show_debug("INFO [--Exercise 1--]: Only one number in Array");
     } else {
       for (let i = 0; i < numbers.length; i++) {
-        sum += numbers[i];
+        if (numbers[i] % 2 == 0) {
+          sum += numbers[i];
+          count_of_even_numbers++;
+        }
+      }
+      show_debug("INFO [--Exercise 1--]: SUM: " + sum);
+      if (count_of_even_numbers == 0) {
+        // info, if no even number is in array
+        show_debug("INFO [--Exercise 1--]: no even number in array");
       }
     }
   } else {
-    console.log("Kein Array übergeben");
+    show_debug("WARNING [--Exercise 1--]: No array is given");
   }
   return sum;
 }
