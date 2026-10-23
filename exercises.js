@@ -120,7 +120,7 @@ function dayName(dayNumber) {
       current_day = weekday[7];
       break;
     default:
-     current_day =  "invalid";
+      current_day = "invalid";
   }
 
   debug_info("INFO [--Exercise 2--]: " + current_day);
@@ -186,13 +186,11 @@ function countVowels(text) {
 //   fizzBuzz(5) -> "1, 2, Fizz, 4, Buzz"
 // ---------------------------------------------------------------------
 function fizzBuzz(n) {
-
   //multiples declaration
   const multiples_val = {
     3: "Fizz",
     5: "Buzz",
   };
-
 
   //n to array
   let n_to_number_arr = [];
@@ -207,12 +205,10 @@ function fizzBuzz(n) {
     return fail_return;
   }
 
-
   //number loop
   for (let i = 1; i <= n; i++) {
     n_to_number_arr.push(i);
   }
-
 
   for (let a = 0; a < n_to_number_arr.length; a++) {
     let new_str = "";
@@ -220,23 +216,18 @@ function fizzBuzz(n) {
       let key = Object.keys(multiples_val)[i];
       let multiplicator = key;
       let multiplicator_str = multiples_val[key];
-      if ((n_to_number_arr[a] != 0 && (n_to_number_arr[a] % multiplicator) === 0)){
-            new_str += multiplicator_str;
-
+      if (n_to_number_arr[a] != 0 && n_to_number_arr[a] % multiplicator === 0) {
+        new_str += multiplicator_str;
       }
     }
-    if (new_str !== ""){
-    n_to_number_arr[a] = new_str;
-    }  
-}
+    if (new_str !== "") {
+      n_to_number_arr[a] = new_str;
+    }
+  }
 
-//array to string
-finish_str = n_to_number_arr.join(",");
+  //array to string
+  finish_str = n_to_number_arr.join(", ");
   return finish_str;
-
-
-
-
 }
 
 // ---------------------------------------------------------------------
