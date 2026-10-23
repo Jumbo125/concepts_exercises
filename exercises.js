@@ -48,8 +48,7 @@ function sumOfEvens(numbers) {
     return false;
   }
   if (numbers.length < 1) {
-    //falls arra nur einen eintrag enthaelt, diesen retour geben
-    //wertuebergabe nicht zusaetzlich notwendig,da die anschließende for-schleife den sten WErt vom Array einfach beibehaelt
+    //if only one entry, show info
     debug_info("INFO [--Exercise 1--]: Only one number in Array");
   } else {
     for (let i = 0; i < numbers.length; i++) {
@@ -121,7 +120,7 @@ function dayName(dayNumber) {
       current_day = weekday[7];
       break;
     default:
-      "invalid";
+     current_day =  "invalid";
   }
 
   debug_info("INFO [--Exercise 2--]: " + current_day);
@@ -140,7 +139,7 @@ function countVowels(text) {
   const vowels = ["a", "e", "i", "o", "u"];
   let sum_vowel = 0;
 
-   debug_info("Info [--Exercise 3--]: INPUT: " + vowels);
+  debug_info("Info [--Exercise 3--]: INPUT: " + vowels);
 
   // check if text is str
   if (typeof text !== "string") {
@@ -152,8 +151,7 @@ function countVowels(text) {
   }
 
   //convert text to lowercase, for non upper/lower sensitive search
-   const low_text =  text.toLowerCase();
-
+  const low_text = text.toLowerCase();
 
   for (let i = 0; i < low_text.length; i++) {
     switch (low_text[i]) {
@@ -173,7 +171,7 @@ function countVowels(text) {
         sum_vowel += 1;
         break;
       default:
-        0;
+        sun_vowel = 0;
     }
   }
   debug_info("Info [--Exercise 3--]: Count:" + sum_vowel);
@@ -187,7 +185,59 @@ function countVowels(text) {
 // multiples of both become "FizzBuzz". For n < 1 return "".
 //   fizzBuzz(5) -> "1, 2, Fizz, 4, Buzz"
 // ---------------------------------------------------------------------
-function fizzBuzz(n) {}
+function fizzBuzz(n) {
+
+  //multiples declaration
+  const multiples_val = {
+    3: "Fizz",
+    5: "Buzz",
+  };
+
+
+  //n to array
+  let n_to_number_arr = [];
+  let finish_str = "";
+  const fail_return = "";
+
+  if (isNaN(n)) {
+    debug_info("Warning [--Exercise 4--]: NOT INT given");
+    return fail_return;
+  } else if (n < 1) {
+    debug_info("Warning [--Exercise 4--]: INT smaller than 1");
+    return fail_return;
+  }
+
+
+  //number loop
+  for (let i = 1; i <= n; i++) {
+    n_to_number_arr.push(i);
+  }
+
+
+  for (let a = 0; a < n_to_number_arr.length; a++) {
+    let new_str = "";
+    for (let i = 0; i < Object.keys(multiples_val).length; i++) {
+      let key = Object.keys(multiples_val)[i];
+      let multiplicator = key;
+      let multiplicator_str = multiples_val[key];
+      if ((n_to_number_arr[a] != 0 && (n_to_number_arr[a] % multiplicator) === 0)){
+            new_str += multiplicator_str;
+
+      }
+    }
+    if (new_str !== ""){
+    n_to_number_arr[a] = new_str;
+    }  
+}
+
+//array to string
+finish_str = n_to_number_arr.join(",");
+  return finish_str;
+
+
+
+
+}
 
 // ---------------------------------------------------------------------
 // Exercise 5: isPalindrome
