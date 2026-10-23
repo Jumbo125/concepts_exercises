@@ -88,7 +88,7 @@ function dayName(dayNumber) {
 
   let current_day = "";
 
-  if (isNaN(dayNumber) || dayNumber < 1 || dayNumber > 7) {
+  if (!Number.isInteger(dayNumber) || dayNumber < 1 || dayNumber > 7) {
     debug_info("WARNING [--Exercise 2--]: No INT is given");
     dayNumber = 0;
   }
@@ -192,12 +192,10 @@ function fizzBuzz(n) {
     5: "Buzz",
   };
 
-  //n to array
-  let n_to_number_arr = [];
   let finish_str = "";
   const fail_return = "";
 
-  if (isNaN(n)) {
+  if (!Number.isInteger(n)) {
     debug_info("Warning [--Exercise 4--]: NOT INT given");
     return fail_return;
   } else if (n < 1) {
@@ -205,29 +203,33 @@ function fizzBuzz(n) {
     return fail_return;
   }
 
-  //number loop
-  for (let i = 1; i <= n; i++) {
-    n_to_number_arr.push(i);
-  }
 
-  for (let a = 0; a < n_to_number_arr.length; a++) {
+  for (let a = 1; a <= n; a++) {
     let new_str = "";
     for (let i = 0; i < Object.keys(multiples_val).length; i++) {
       let key = Object.keys(multiples_val)[i];
       let multiplicator = key;
       let multiplicator_str = multiples_val[key];
-      if (n_to_number_arr[a] != 0 && n_to_number_arr[a] % multiplicator === 0) {
+      if (a != 0 && a % multiplicator === 0) {
         new_str += multiplicator_str;
       }
     }
+
+    //set delim. without comma, on firt place
+    let delim = "";
+    if (a != 1){
+        delim= ", ";
+    } 
     if (new_str !== "") {
-      n_to_number_arr[a] = new_str;
+      finish_str += delim + new_str;
+    }
+    else{
+        finish_str += delim + a ;
     }
   }
 
-  //array to string
-  finish_str = n_to_number_arr.join(", ");
-  return finish_str;
+  //finish_str = n_to_number_arr.join(", ");
+  //return finish_str;
 }
 
 // ---------------------------------------------------------------------
