@@ -135,7 +135,50 @@ function dayName(dayNumber) {
 // Hint: text[i] gives you the character at position i.
 //   countVowels("Hello World") -> 3
 // ---------------------------------------------------------------------
-function countVowels(text) {}
+function countVowels(text) {
+  //vowels declaration
+  const vowels = ["a", "e", "i", "o", "u"];
+  let sum_vowel = 0;
+
+   debug_info("Info [--Exercise 3--]: INPUT: " + vowels);
+
+  // check if text is str
+  if (typeof text !== "string") {
+    debug_info("Warning [--Exercise 3--]: NO String given");
+    return sum_vowel;
+  } else if (text === "") {
+    debug_info("Warning [--Exercise 3--]: String is empty");
+    return sum_vowel;
+  }
+
+  //convert text to lowercase, for non upper/lower sensitive search
+   const low_text =  text.toLowerCase();
+
+
+  for (let i = 0; i < low_text.length; i++) {
+    switch (low_text[i]) {
+      case vowels[0]:
+        sum_vowel += 1;
+        break;
+      case vowels[1]:
+        sum_vowel += 1;
+        break;
+      case vowels[2]:
+        sum_vowel += 1;
+        break;
+      case vowels[3]:
+        sum_vowel += 1;
+        break;
+      case vowels[4]:
+        sum_vowel += 1;
+        break;
+      default:
+        0;
+    }
+  }
+  debug_info("Info [--Exercise 3--]: Count:" + sum_vowel);
+  return sum_vowel;
+}
 
 // ---------------------------------------------------------------------
 // Exercise 4: fizzBuzz
@@ -394,6 +437,7 @@ testExercise("3. countVowels", countVowels, "number", [
   { args: [""], expected: 0 },
   { args: ["AEIOU aeiou"], expected: 10 },
   { args: ["rhythm"], expected: 0 },
+  { args: [1], expected: 0 },
 ]);
 
 testExercise("4. fizzBuzz", fizzBuzz, "string", [
