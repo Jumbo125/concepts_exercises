@@ -27,10 +27,10 @@
 
 /* ########## MY OWN DEBUGGING ## */
 const my_debug = true;
-function debug_info (exercise_txt){
-    if (my_debug){
+function debug_info(exercise_txt) {
+  if (my_debug) {
     console.log(exercise_txt);
-    }
+  }
 }
 
 /* ############################## */
@@ -47,23 +47,23 @@ function sumOfEvens(numbers) {
     //no array, return false
     return false;
   }
-    if (numbers.length < 1) {
-      //falls arra nur einen eintrag enthaelt, diesen retour geben
-      //wertuebergabe nicht zusaetzlich notwendig,da die anschließende for-schleife den sten WErt vom Array einfach beibehaelt
-      debug_info("INFO [--Exercise 1--]: Only one number in Array");
-    } else {
-      for (let i = 0; i < numbers.length; i++) {
-        if (numbers[i] % 2 == 0) {
-          sum += numbers[i];
-          count_of_even_numbers++;
-        }
-      }
-      debug_info("INFO [--Exercise 1--]: SUM: " + sum);
-      if (count_of_even_numbers == 0) {
-        // info, if no even number is in array
-        debug_info("INFO [--Exercise 1--]: no even number in array");
+  if (numbers.length < 1) {
+    //falls arra nur einen eintrag enthaelt, diesen retour geben
+    //wertuebergabe nicht zusaetzlich notwendig,da die anschließende for-schleife den sten WErt vom Array einfach beibehaelt
+    debug_info("INFO [--Exercise 1--]: Only one number in Array");
+  } else {
+    for (let i = 0; i < numbers.length; i++) {
+      if (numbers[i] % 2 == 0) {
+        sum += numbers[i];
+        count_of_even_numbers++;
       }
     }
+    debug_info("INFO [--Exercise 1--]: SUM: " + sum);
+    if (count_of_even_numbers == 0) {
+      // info, if no even number is in array
+      debug_info("INFO [--Exercise 1--]: no even number in array");
+    }
+  }
   return sum;
 }
 
@@ -75,32 +75,57 @@ function sumOfEvens(numbers) {
 //   dayName(3) -> "Wednesday"
 // ---------------------------------------------------------------------
 function dayName(dayNumber) {
-    
-    // weekday variable declaration
-    const weekday = {
-        0: "Invalid",
-        1:  "Monday",
-        2:  "Tuesday",
-        3:  "Wednesday",
-        4:  "Thuesday",
-        5: "Friday",
-        6: "Saturday",
-        7: "Sunday"
-    }
+  // weekday variable declaration
+  const weekday = {
+    0: "Invalid",
+    1: "Monday",
+    2: "Tuesday",
+    3: "Wednesday",
+    4: "Thuesday",
+    5: "Friday",
+    6: "Saturday",
+    7: "Sunday",
+  };
 
-    if (isNaN(dayNumber)){
-        debug_info("WARNING [--Exercise 2--]: No INT is given");
-        return "Invalid";
-    }
-    else if (dayNumber < 1 || dayNumber > 7){
-        dayNumber = 0;
-    }
+  let current_day = "";
 
-    debug_info("INFO [--Exercise 2--]: " + dayNumber);
-    debug_info("INFO [--Exercise 2--]: " + weekday[dayNumber]);
-    return weekday[dayNumber];
-   
+  if (isNaN(dayNumber) || dayNumber < 1 || dayNumber > 7) {
+    debug_info("WARNING [--Exercise 2--]: No INT is given");
+    dayNumber = 0;
+  }
 
+  //Switch state
+  switch (dayNumber) {
+    case 0:
+      current_day = weekday[0];
+      break;
+    case 1:
+      current_day = weekday[1];
+      break;
+    case 2:
+      current_day = weekday[2];
+      break;
+    case 3:
+      current_day = weekday[3];
+      break;
+    case 4:
+      current_day = weekday[4];
+      break;
+    case 5:
+      current_day = weekday[5];
+      break;
+    case 6:
+      current_day = weekday[6];
+      break;
+    case 7:
+      current_day = weekday[7];
+      break;
+    default:
+      "invalid";
+  }
+
+  debug_info("INFO [--Exercise 2--]: " + current_day);
+  return current_day;
 }
 
 // ---------------------------------------------------------------------
