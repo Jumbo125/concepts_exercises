@@ -27,7 +27,7 @@
 
 /* ########## MY OWN DEBUGGING ## */
 const my_debug = true;
-function show_debug (exercise_txt){
+function debug_info (exercise_txt){
     if (my_debug){
     console.log(exercise_txt);
     }
@@ -41,12 +41,16 @@ function sumOfEvens(numbers) {
   */
   let sum = 0;
   let count_of_even_numbers = 0;
-  show_debug("INFO [--Exercise 1--]: INPUT ARRAY: " + numbers);
-  if (Array.isArray(numbers)) {
+  debug_info("INFO [--Exercise 1--]: INPUT ARRAY: " + numbers);
+  if (!Array.isArray(numbers)) {
+    debug_info("WARNING [--Exercise 1--]: No array is given");
+    //no array, return false
+    return false;
+  }
     if (numbers.length < 1) {
       //falls arra nur einen eintrag enthaelt, diesen retour geben
       //wertuebergabe nicht zusaetzlich notwendig,da die anschließende for-schleife den sten WErt vom Array einfach beibehaelt
-      show_debug("INFO [--Exercise 1--]: Only one number in Array");
+      debug_info("INFO [--Exercise 1--]: Only one number in Array");
     } else {
       for (let i = 0; i < numbers.length; i++) {
         if (numbers[i] % 2 == 0) {
@@ -54,15 +58,12 @@ function sumOfEvens(numbers) {
           count_of_even_numbers++;
         }
       }
-      show_debug("INFO [--Exercise 1--]: SUM: " + sum);
+      debug_info("INFO [--Exercise 1--]: SUM: " + sum);
       if (count_of_even_numbers == 0) {
         // info, if no even number is in array
-        show_debug("INFO [--Exercise 1--]: no even number in array");
+        debug_info("INFO [--Exercise 1--]: no even number in array");
       }
     }
-  } else {
-    show_debug("WARNING [--Exercise 1--]: No array is given");
-  }
   return sum;
 }
 
@@ -73,7 +74,34 @@ function sumOfEvens(numbers) {
 // Any other number gives "Invalid".
 //   dayName(3) -> "Wednesday"
 // ---------------------------------------------------------------------
-function dayName(dayNumber) {}
+function dayName(dayNumber) {
+    
+    // weekday variable declaration
+    const weekday = {
+        0: "Invalid",
+        1:  "Monday",
+        2:  "Tuesday",
+        3:  "Wednesday",
+        4:  "Thuesday",
+        5: "Friday",
+        6: "Saturday",
+        7: "Sonday"
+    }
+
+    if (isNaN(dayNumber)){
+        debug_info("WARNING [--Exercise 2--]: No INT is given");
+        return "Invalid";
+    }
+    else if (dayNumber < 1 || dayNumber > 7){
+        dayNumber = 0;
+    }
+
+    debug_info("INFO [--Exercise 2--]: " + dayNumber);
+    debug_info("INFO [--Exercise 2--]: " + weekday[dayNumber]);
+    return weekday[dayNumber];
+   
+
+}
 
 // ---------------------------------------------------------------------
 // Exercise 3: countVowels
