@@ -85,7 +85,7 @@ function dayName(dayNumber) {
         4:  "Thuesday",
         5: "Friday",
         6: "Saturday",
-        7: "Sonday"
+        7: "Sunday"
     }
 
     if (isNaN(dayNumber)){
