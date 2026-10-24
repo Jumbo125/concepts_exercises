@@ -394,17 +394,17 @@ function pointsToGrade(points) {
 function gradeReport(student) {
   const fail_str = "Wrong input.";
 
-  if (typeof (student) !== "object" ) {
+  if (typeof student !== "object") {
     debug_info("WARNING [--Exercise 9--]: No object is given");
     return fail_str;
   }
 
-  if ("name" in student === false || "points" in student === "false"){
+  if ("name" in student === false || "points" in student === "false") {
     debug_info("WARNING [--Exercise 9--]: Parameters in Objects are missing");
     return fail_str;
   }
 
-    debug_info("INFO [--Exercise 9--]: INPUT:" + student);
+  debug_info("INFO [--Exercise 9--]: INPUT:" + student);
   const grade = pointsToGrade(student.points);
   let message = "";
 
@@ -441,7 +441,65 @@ function gradeReport(student) {
 // (rock beats scissors, scissors beats paper, paper beats rock)
 //   rockPaperScissors("rock", "paper") -> "Player 2 wins"
 // ---------------------------------------------------------------------
-function rockPaperScissors(choice1, choice2) {}
+function rockPaperScissors(choice1, choice2) {
+  debug_info(
+    `INFO [--Exercise 10-]: Choicse is not correct, please use on of this selections: Player 1 - ${choice1} / Player 2 - ${choice2}`,
+  );
+
+  // ###############  define rules
+  const rules = {
+    rock: {
+      beat: "scissors",
+      loos: "paper",
+      draw: "rock",
+    },
+    scissors: {
+      beat: "paper",
+      loos: "rock",
+      draw: "scissors",
+    },
+    paper: {
+      beat: "rock",
+      loos: "scissors",
+      draw: "paper",
+    },
+  };
+
+  //########### Fail Text
+  const fail_str = "Invalid input";
+  let player1_state = "";
+  let winner = "";
+
+  if (!Object.keys(rules).includes(choice1)) {
+    debug_info(
+      `WARNING [--Exercise 10-]: Choicse 1 is not correct, please use on of this selections: ${Object.keys(rules).join(", ")}`,
+    );
+    return fail_str;
+  }
+  if (!Object.keys(rules).includes(choice2)) {
+    debug_info(
+      `WARNING [--Exercise 10-]: Choicse 2 is not correct, please use on of this selections: ${Object.keys(rules).join(", ")}`,
+    );
+    return fail_str;
+  }
+
+  //check input versus input
+  if (rules[choice1].beat === choice2) {
+    //player1 wins
+    debug_info("INFO [--Exercise 10--]: Player 1 wins");
+    return "Player 1 wins";
+  } else if (rules[choice1].loos === choice2) {
+    //player1 loos
+    debug_info("INFO [--Exercise 10--]: Player 1 loos");
+    return "Player 2 wins";
+  } else if (rules[choice1].draw === choice2) {
+    //player1 loos
+    debug_info("INFO [--Exercise 10--]: Draw");
+    return "Draw";
+  } else {
+    //not avaible/needed comparison
+  }
+}
 
 // ---------------------------------------------------------------------
 // Exercise 11: findOldest
@@ -449,7 +507,20 @@ function rockPaperScissors(choice1, choice2) {}
 // Return the NAME of the oldest person. If two people have the same
 // highest age, return the one that comes first. Empty array gives "".
 // ---------------------------------------------------------------------
-function findOldest(people) {}
+function findOldest(people) {
+  if (typeof people !== "object") {
+    debug_info("WARNING [--Exercise 11--]: No object is given");
+    //no array, return false
+    return "wrong typ of input";
+  }
+  if (Object.keys(people).length === 0) {
+    return "";
+  }
+
+  //use sort function, to sort the obj, b.age - a.age means DESC, a.age - b.age menas ASC
+  const people_sort = people.sort((a, b) => b.age - a.age);
+  return people_sort[0].name;
+}
 
 // ---------------------------------------------------------------------
 // Exercise 12: namesAtLeastAge
