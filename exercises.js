@@ -339,7 +339,49 @@ function countWeekendDays(dayNumbers) {
 //   90-100 -> 1,  80-89 -> 2,  65-79 -> 3,  50-64 -> 4,  below 50 -> 5
 //   pointsToGrade(85) -> 2
 // ---------------------------------------------------------------------
-function pointsToGrade(points) {}
+function pointsToGrade(points) {
+  let grade = 0;
+  //check if number, include dot numbers (isNaN insteand of Number.Integer)
+  if (isNaN(points)) {
+    debug_info("WARNING [--Exercise 8--]: No number is given");
+    return grade;
+  }
+
+  //declaration of  points per grade
+  const grades = {
+    1: {
+      min: 90,
+      max: 100,
+    },
+    2: {
+      min: 80,
+      max: 89,
+    },
+    3: {
+      min: 65,
+      max: 79,
+    },
+    4: {
+      min: 50,
+      max: 64,
+    },
+    5: {
+      min: 0,
+      max: 50,
+    },
+  };
+
+  debug_info("INFO [--Exercise 8--]: INPUT: Points => " + points);
+
+  //find in object the point. Use a filter for >, <, <=, >= to get the correct rane
+  //(key=> ) means, search inside the first layer key
+  grade = Object.keys(grades).find(
+    (key) => points >= grades[key].min && points <= grades[key].max,
+  );
+  //i don't know why grade will be a string, cuase i set it as an int inside the object. I fixed it with simple convert string to int
+  debug_info("INFO [--Exercise 8--]: OUTPUT: Grade => " + grade);
+  return parseFloat(grade);
+}
 
 // ---------------------------------------------------------------------
 // Exercise 9: gradeReport
@@ -349,7 +391,47 @@ function pointsToGrade(points) {}
 // word: 1 Excellent, 2 Good, 3 Satisfactory, 4 Sufficient,
 //       5 Insufficient
 // ---------------------------------------------------------------------
-function gradeReport(student) {}
+function gradeReport(student) {
+  const fail_str = "Wrong input.";
+
+  if (typeof (student) !== "object" ) {
+    debug_info("WARNING [--Exercise 9--]: No object is given");
+    return fail_str;
+  }
+
+  if ("name" in student === false || "points" in student === "false"){
+    debug_info("WARNING [--Exercise 9--]: Parameters in Objects are missing");
+    return fail_str;
+  }
+
+    debug_info("INFO [--Exercise 9--]: INPUT:" + student);
+  const grade = pointsToGrade(student.points);
+  let message = "";
+
+  switch (grade) {
+    case 1:
+      message = `${student.name}: ${grade} (Excellent)`;
+      break;
+    case 2:
+      message = `${student.name}: ${grade} (Good)`;
+      break;
+    case 3:
+      message = `${student.name}: ${grade} (Satisfactory)`;
+      break;
+    case 4:
+      message = `${student.name}: ${grade} (Sufficient)`;
+      break;
+    case 5:
+      message = `${student.name}: ${grade} (Insufficient)`;
+      break;
+
+    default:
+      message = "no Grade between 1-5";
+  }
+  debug_info("INFO [--Exercise 9--]: OUTPUT:" + message);
+
+  return message;
+}
 
 // ---------------------------------------------------------------------
 // Exercise 10: rockPaperScissors
