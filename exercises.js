@@ -27,6 +27,7 @@
 
 /* ########## MY OWN DEBUGGING ## */
 const my_debug = true;
+
 function debug_info(exercise_txt) {
   if (my_debug) {
     console.log(exercise_txt);
@@ -42,11 +43,13 @@ function sumOfEvens(numbers) {
   let sum = 0;
   let count_of_even_numbers = 0;
   debug_info("INFO [--Exercise 1--]: INPUT ARRAY: " + numbers);
+
   if (!Array.isArray(numbers)) {
     debug_info("WARNING [--Exercise 1--]: No array is given");
     //no array, return false
     return false;
   }
+
   if (numbers.length < 1) {
     //if only one entry, show info
     debug_info("INFO [--Exercise 1--]: Only one number in Array");
@@ -203,7 +206,6 @@ function fizzBuzz(n) {
     return fail_return;
   }
 
-
   for (let a = 1; a <= n; a++) {
     let new_str = "";
     for (let i = 0; i < Object.keys(multiples_val).length; i++) {
@@ -217,18 +219,17 @@ function fizzBuzz(n) {
 
     //set delim. without comma, on firt place
     let delim = "";
-    if (a != 1){
-        delim= ", ";
-    } 
+    if (a != 1) {
+      delim = ", ";
+    }
     if (new_str !== "") {
       finish_str += delim + new_str;
-    }
-    else{
-        finish_str += delim + a ;
+    } else {
+      finish_str += delim + a;
     }
   }
-debug_info("INFO [--Exercise 4--]: INPUT: " + n);
-debug_info("INFO [--Exercise 4--]: OUTPUT: " + finish_str);
+  debug_info("INFO [--Exercise 4--]: INPUT: " + n);
+  debug_info("INFO [--Exercise 4--]: OUTPUT: " + finish_str);
   return finish_str;
 }
 
@@ -239,7 +240,34 @@ debug_info("INFO [--Exercise 4--]: OUTPUT: " + finish_str);
 // starting at the back. The empty string is a palindrome.
 //   isPalindrome("level") -> true
 // ---------------------------------------------------------------------
-function isPalindrome(word) {}
+function isPalindrome(word) {
+  //variable declaration
+  let new_word = "";
+  let counter = 0;
+  debug_info("INFO [--Exercise 5--]: INPUT: " + word);
+
+  if (typeof word !== "string") {
+    debug_info("Warning [--Exercise 5--]: : no string");
+    return false;
+  }
+
+  //Idea -> runs the loop reverse
+  counter = word.length - 1;
+  while (counter >= 0) {
+    debug_info("INFO [--Exercise 5--]: Counter: " + counter);
+    new_word += word[counter];
+    counter--;
+  }
+
+  debug_info(
+    `INFO [--Exercise 5--]: ORIGINAL WORD: ${word}, NEW WORD: ${new_word}`,
+  );
+  if (word === new_word) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 // ---------------------------------------------------------------------
 // Exercise 6: buildTriangle
