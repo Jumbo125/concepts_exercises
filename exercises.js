@@ -312,7 +312,7 @@ function buildTriangle(height) {
 //   countWeekendDays([1, 6, 7, 3]) -> 2
 // ---------------------------------------------------------------------
 function countWeekendDays(dayNumbers) {
-if (!Array.isArray(dayNumbers)) {
+  if (!Array.isArray(dayNumbers)) {
     debug_info("WARNING [--Exercise 7--]: No array is given");
     //no array, return false
     return false;
@@ -321,14 +321,16 @@ if (!Array.isArray(dayNumbers)) {
   debug_info("INFO [--Exercise 7--]: INPUT: " + dayNumbers);
   let counter = 0;
 
-  for(let i = 0; dayNumbers.length; i++){
-    if (dayName(dayNumbers) == "Saturday" || dayName(dayNumbers) == "Sunday"){
-        counter ++;
+  for (let i = 0; i < dayNumbers.length; i++) {
+    if (
+      dayName(dayNumbers[i]) == "Saturday" ||
+      dayName(dayNumbers[i]) == "Sunday"
+    ) {
+      counter++;
     }
   }
   debug_info("INFO [--Exercise 7--]: OUTPUT: " + counter);
-  ;
-
+  return counter;
 }
 
 // ---------------------------------------------------------------------
