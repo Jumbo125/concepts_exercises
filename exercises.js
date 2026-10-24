@@ -529,7 +529,32 @@ function findOldest(people) {
 //   namesAtLeastAge([{ name: "Tom", age: 31 }, { name: "Eva", age: 12 }], 18)
 //     -> ["Tom"]
 // ---------------------------------------------------------------------
-function namesAtLeastAge(people, minAge) {}
+function namesAtLeastAge(people, minAge) {
+if (typeof people !== "object") {
+    debug_info("WARNING [--Exercise 12--]: No object is given");
+    //no array, return false
+    return "wrong typ of input";
+  }
+  if (Object.keys(people).length === 0) {
+    return "";
+  }
+
+  //new array to return
+  let name_array = [];
+
+    for (let i = 0; i < Object.keys(people).length; i++){
+      const people_name = people[i].name;
+      const people_age = people[i].age;
+
+      if(people_age >= minAge){
+        name_array.push(people_name);
+      }
+    }
+    alert(name_array);
+  return name_array;
+
+
+}
 
 // ---------------------------------------------------------------------
 // Exercise 13: cartTotal
