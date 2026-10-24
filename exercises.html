@@ -8,6 +8,8 @@
         .pass { color: #6c6; }
         .fail { color: #f66; }
         .todo { color: #cc6; }
+        .info { color: rgb(0, 205, 205); }
+        .warning { color: rgb(152, 0, 0); }
     </style>
 </head>
 <body>
@@ -23,6 +25,9 @@
             if (text.startsWith("[PASS]")) line.className = "pass";
             if (text.startsWith("[FAIL]")) line.className = "fail";
             if (text.startsWith("[TODO]")) line.className = "todo";
+           //my debuging
+            if (text.startsWith("INFO")) line.className = "info";
+            if (text.startsWith("WARNING")) line.className = "warning";
             output.appendChild(line);
         };
         window.onerror = function (message, source, lineNumber) {

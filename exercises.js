@@ -142,14 +142,14 @@ function countVowels(text) {
   const vowels = ["a", "e", "i", "o", "u"];
   let sum_vowel = 0;
 
-  debug_info("Info [--Exercise 3--]: INPUT: " + vowels);
+  debug_info("INFO [--Exercise 3--]: INPUT: " + vowels);
 
   // check if text is str
   if (typeof text !== "string") {
-    debug_info("Warning [--Exercise 3--]: NO String given");
+    debug_info("WARNING [--Exercise 3--]: NO String given");
     return sum_vowel;
   } else if (text === "") {
-    debug_info("Warning [--Exercise 3--]: String is empty");
+    debug_info("WARNING [--Exercise 3--]: String is empty");
     return sum_vowel;
   }
 
@@ -177,7 +177,7 @@ function countVowels(text) {
         sun_vowel = 0;
     }
   }
-  debug_info("Info [--Exercise 3--]: Count:" + sum_vowel);
+  debug_info("INFO [--Exercise 3--]: Count:" + sum_vowel);
   return sum_vowel;
 }
 
@@ -199,10 +199,10 @@ function fizzBuzz(n) {
   const fail_return = "";
 
   if (!Number.isInteger(n)) {
-    debug_info("Warning [--Exercise 4--]: NOT INT given");
+    debug_info("WARNING [--Exercise 4--]: NOT INT given");
     return fail_return;
   } else if (n < 1) {
-    debug_info("Warning [--Exercise 4--]: INT smaller than 1");
+    debug_info("WARNING [--Exercise 4--]: INT smaller than 1");
     return fail_return;
   }
 
@@ -247,7 +247,7 @@ function isPalindrome(word) {
   debug_info("INFO [--Exercise 5--]: INPUT: " + word);
 
   if (typeof word !== "string") {
-    debug_info("Warning [--Exercise 5--]: : no string");
+    debug_info("WARNING [--Exercise 5--]: : no string");
     return false;
   }
 
@@ -278,7 +278,32 @@ function isPalindrome(word) {
 //             **
 //             ***
 // ---------------------------------------------------------------------
-function buildTriangle(height) {}
+function buildTriangle(height) {
+  debug_info("INFO [--Exercise 6--]: INPUT: " + height);
+  //variable declaration
+  const fail_str = "Fail Input";
+  const triangle_str = "*";
+  let finish_triangle = "";
+
+  if (!Number.isInteger(height)) {
+    debug_info("WARNING [--Exercise 6--]: NOT INT given");
+    return fail_str;
+  }
+
+  for (let i = 1; i <= height; i++) {
+    let break_str = "";
+    if (i < height) {
+      break_str = "\n";
+    } else {
+      break_str = "";
+    }
+
+    finish_triangle += triangle_str.repeat(i) + break_str;
+
+    debug_info(`INFO [--Exercise 6--]: \n  ${i}.Line:\n ${finish_triangle}`);
+  }
+  return finish_triangle;
+}
 
 // ---------------------------------------------------------------------
 // Exercise 7: countWeekendDays
