@@ -227,9 +227,9 @@ function fizzBuzz(n) {
         finish_str += delim + a ;
     }
   }
-
-  //finish_str = n_to_number_arr.join(", ");
-  //return finish_str;
+debug_info("INFO [--Exercise 4--]: INPUT: " + n);
+debug_info("INFO [--Exercise 4--]: OUTPUT: " + finish_str);
+  return finish_str;
 }
 
 // ---------------------------------------------------------------------
