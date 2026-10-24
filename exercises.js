@@ -536,7 +536,7 @@ if (typeof people !== "object") {
     return "wrong typ of input";
   }
   if (Object.keys(people).length === 0) {
-    return "";
+    return [];
   }
 
   //new array to return
