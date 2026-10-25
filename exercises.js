@@ -522,7 +522,7 @@ function findOldest(people) {
 
   //use sort function, to sort the obj, b.age - a.age means DESC, a.age - b.age menas ASC
   const people_sort = people.sort((a, b) => b.age - a.age);
-  debug_info(`INFO [--Exercise 11-]: Output: ${people_sort[0].name}`);
+  debug_info(`INFO [--Exercise 11-]: Output: ${JSON.stringify(people_sort)}`);
   return people_sort[0].name;
 }
 
@@ -570,7 +570,7 @@ function namesAtLeastAge(people, minAge) {
 // ---------------------------------------------------------------------
 function cartTotal(cart) {
   debug_info(
-    `INFO [--Exercise 13-]: Input: count of First layer ${Object.keys(cart).length}`,
+    `INFO [--Exercise 13-]: Input: count of First layer ${JSON.stringify(cart)}`,
   );
   if (typeof cart !== "object") {
     debug_info("WARNING [--Exercise 13--]: No object is given");
@@ -665,7 +665,7 @@ function primesUpTo(n) {
       prime_array.push(i);
     }
   }
-  debug_info(`INFO [--Exercise 14-]: Input:${n} Prime_array: ${prime_array}`);
+  debug_info(`INFO [--Exercise 15-]: Input:${n} Prime_array: ${prime_array}`);
   return prime_array;
 }
 
@@ -679,7 +679,42 @@ function primesUpTo(n) {
 //   wordStatistics("the quick brown fox")
 //     -> { wordCount: 4, longestWord: "quick" }
 // ---------------------------------------------------------------------
-function wordStatistics(sentence) {}
+function wordStatistics(sentence) {
+  
+    debug_info(`INFO [--Exercise 16-]: Input:${sentence}`);
+
+  if (typeof sentence !== "string") {
+    debug_info("WARNING [--Exercise 16--]: no string given");
+    return ["no string given"];
+  }
+
+  
+  //declaration of return obj
+  let sentence_obj = {};
+  sentence_obj = { wordCount: 0, longestWord: "" };
+
+  //remove space on start end end
+  sentence = sentence.trim(); //not work always
+
+  //replace multiple whitespaces to single whitespace with regex, i use regex tools, to check the correct syntax
+  const sentence_filterd = sentence.replace(/\s+/g, " ");
+
+  //An empty sentence gives { wordCount: 0, longestWord: "" }.
+  if (sentence_filterd === "" || sentence_filterd === " ") {
+    return sentence_obj;
+  }
+
+  //string to array
+  const sentence_as_array = sentence_filterd.split(" ");
+  //sort like in funciton 11
+  sentence_as_array.sort((a, b) => b.length - a.length);
+
+  sentence_obj.wordCount = sentence_as_array.length;
+
+  sentence_obj.longestWord = sentence_as_array[0];
+  debug_info(`INFO [--Exercise 16-]: Output:${JSON.stringify(sentence_obj)}`);
+  return sentence_obj;
+}
 
 // =====================================================================
 // =====================================================================
