@@ -573,7 +573,7 @@ function cartTotal(cart) {
     return [];
   }
 //declaration
-  let finish_cart = new Object;
+  let finish_cart = new Object();
   
 //check each product
   for (let i = 0; i < Object.keys(cart).length; i++){
@@ -587,7 +587,8 @@ function cartTotal(cart) {
     
     const price_with_sale = Math.round((sum - (sum*sale_percentage))*100) / 100;
     console.log("t" + finish_cart);
-    finish_cart[i].item = cart[i].item;
+    finish_cart[i] = {}; // create new sub object
+    finish_cart[i].items = cart[i].item;
     finish_cart[i].price = cart[i].price;
     finish_cart[i].quantity = cart[i].quantity;
     finish_cart[i].discount = discount;
@@ -595,7 +596,7 @@ function cartTotal(cart) {
     finish_cart[i].price_with_sale = price_with_sale;
     finish_cart[i].sale_percentage = sale_percentage;
   }
-  
+  console.log( finish_cart);
   
 
 }

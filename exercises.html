@@ -18,17 +18,23 @@
         // Show console.log output on the page as well (no need for Node.js).
         const output = document.getElementById("output");
         const originalLog = console.log;
+        const show_normal_console_log = true;
+
         console.log = function (text) {
+            
             originalLog(text);
             const line = document.createElement("div");
             line.textContent = text;
-            if (text.startsWith("[PASS]")) line.className = "pass";
-            if (text.startsWith("[FAIL]")) line.className = "fail";
-            if (text.startsWith("[TODO]")) line.className = "todo";
-           //my debuging
-            if (text.startsWith("INFO")) line.className = "info";
-            if (text.startsWith("WARNING")) line.className = "warning";
+            if(show_normal_console_log === false){
+                if (text.startsWith("[PASS]")) line.className = "pass";
+                if (text.startsWith("[FAIL]")) line.className = "fail";
+                if (text.startsWith("[TODO]")) line.className = "todo";
+            //my debuging
+                if (text.startsWith("INFO")) line.className = "info";
+                if (text.startsWith("WARNING")) line.className = "warning";
+            }
             output.appendChild(line);
+            
         };
         window.onerror = function (message, source, lineNumber) {
            console.log("ERROR in " + source + " line " + lineNumber + ": " + message);
