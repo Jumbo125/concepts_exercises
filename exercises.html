@@ -18,7 +18,9 @@
         // Show console.log output on the page as well (no need for Node.js).
         const output = document.getElementById("output");
         const originalLog = console.log;
-        const show_normal_console_log = true;
+
+        //insert normal console.log
+        const show_normal_console_log = false;
 
         console.log = function (text) {
             

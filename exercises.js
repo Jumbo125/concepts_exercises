@@ -570,35 +570,39 @@ function cartTotal(cart) {
     return "wrong typ of input";
   }
   if (Object.keys(cart).length === 0) {
-    return [];
+    return 0;
   }
 //declaration
   let finish_cart = new Object();
   
 //check each product
+//create new object with all important details, to make it easier for other functions
   for (let i = 0; i < Object.keys(cart).length; i++){
     let discount = false
     let sale_percentage = 0;
-    const sum = cart[i].price * cart[i].price;
+    const sum = cart[i].price * cart[i].quantity;
     if (sum > 10){
       discount = true;
       sale_percentage = 0.1;
      }
     
-    const price_with_sale = Math.round((sum - (sum*sale_percentage))*100) / 100;
-    console.log("t" + finish_cart);
-    finish_cart[i] = {}; // create new sub object
-    finish_cart[i].items = cart[i].item;
-    finish_cart[i].price = cart[i].price;
-    finish_cart[i].quantity = cart[i].quantity;
-    finish_cart[i].discount = discount;
-    finish_cart[i].price_with_sale = sum;
-    finish_cart[i].price_with_sale = price_with_sale;
-    finish_cart[i].sale_percentage = sale_percentage;
-  }
-  console.log( finish_cart);
+    const sum_with_sale = Math.round((sum - (sum*sale_percentage))*100) / 100;
   
+    finish_cart[i] = {}; // create new sub object
+    finish_cart[i]['items'] = cart[i].item;
+    finish_cart[i]['price'] = cart[i].price;
+    finish_cart[i]['quantity'] = cart[i].quantity;
+    finish_cart[i]['discount'] = discount;
+    finish_cart[i]['sum_with_sale'] = sum_with_sale; //if no sale, this sale-sum is equally to normal sum
+    finish_cart[i]['sum_without_sale'] = sum;
+    finish_cart[i]['sale_percentage'] = sale_percentage;
+  }
 
+  let total = 0;
+  for (let i in finish_cart) {
+    total += finish_cart[i].sum_with_sale;
+  }
+ return total;
 }
 
 // ---------------------------------------------------------------------
