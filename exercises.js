@@ -581,7 +581,7 @@ function cartTotal(cart) {
     let discount = false
     let sale_percentage = 0;
     const sum = cart[i].price * cart[i].quantity;
-    if (sum > 10){
+    if (cart[i].quantity >= 10){
       discount = true;
       sale_percentage = 0.1;
      }
