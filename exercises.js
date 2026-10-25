@@ -508,6 +508,9 @@ function rockPaperScissors(choice1, choice2) {
 // highest age, return the one that comes first. Empty array gives "".
 // ---------------------------------------------------------------------
 function findOldest(people) {
+  debug_info(
+    `INFO [--Exercise 11-]: Input: First Keys of Poeple {${Object.keys(people)}}`,
+  );
   if (typeof people !== "object") {
     debug_info("WARNING [--Exercise 11--]: No object is given");
     //no array, return false
@@ -519,6 +522,7 @@ function findOldest(people) {
 
   //use sort function, to sort the obj, b.age - a.age means DESC, a.age - b.age menas ASC
   const people_sort = people.sort((a, b) => b.age - a.age);
+  debug_info(`INFO [--Exercise 11-]: Output: ${people_sort[0].name}`);
   return people_sort[0].name;
 }
 
@@ -530,7 +534,10 @@ function findOldest(people) {
 //     -> ["Tom"]
 // ---------------------------------------------------------------------
 function namesAtLeastAge(people, minAge) {
-if (typeof people !== "object") {
+  debug_info(
+    `INFO [--Exercise 12-]: Input: First Keys of Poeple {${Object.keys(people)}}, MinAge {${minAge}}`,
+  );
+  if (typeof people !== "object") {
     debug_info("WARNING [--Exercise 12--]: No object is given");
     //no array, return false
     return "wrong typ of input";
@@ -542,17 +549,16 @@ if (typeof people !== "object") {
   //new array to return
   let name_array = [];
 
-    for (let i = 0; i < Object.keys(people).length; i++){
-      const people_name = people[i].name;
-      const people_age = people[i].age;
+  for (let i = 0; i < Object.keys(people).length; i++) {
+    const people_name = people[i].name;
+    const people_age = people[i].age;
 
-      if(people_age >= minAge){
-        name_array.push(people_name);
-      }
+    if (people_age >= minAge) {
+      name_array.push(people_name);
     }
+  }
+  debug_info(`INFO [--Exercise 12-]: Ouput: ${name_array}`);
   return name_array;
-
-
 }
 
 // ---------------------------------------------------------------------
@@ -563,7 +569,9 @@ if (typeof people !== "object") {
 //   cartTotal([{ item: "Pen", price: 2, quantity: 10 }]) -> 18
 // ---------------------------------------------------------------------
 function cartTotal(cart) {
-
+  debug_info(
+    `INFO [--Exercise 13-]: Input: count of First layer ${Object.keys(cart).length}`,
+  );
   if (typeof cart !== "object") {
     debug_info("WARNING [--Exercise 13--]: No object is given");
     //no array, return false
@@ -572,37 +580,38 @@ function cartTotal(cart) {
   if (Object.keys(cart).length === 0) {
     return 0;
   }
-//declaration
+  //declaration
   let finish_cart = new Object();
-  
-//check each product
-//create new object with all important details, to make it easier for other functions
-  for (let i = 0; i < Object.keys(cart).length; i++){
-    let discount = false
+
+  //check each product
+  //create new object with all important details, to make it easier for other functions
+  for (let i = 0; i < Object.keys(cart).length; i++) {
+    let discount = false;
     let sale_percentage = 0;
     const sum = cart[i].price * cart[i].quantity;
-    if (cart[i].quantity >= 10){
+    if (cart[i].quantity >= 10) {
       discount = true;
       sale_percentage = 0.1;
-     }
-    
-    const sum_with_sale = Math.round((sum - (sum*sale_percentage))*100) / 100;
-  
+    }
+
+    const sum_with_sale = Math.round((sum - sum * sale_percentage) * 100) / 100;
+
     finish_cart[i] = {}; // create new sub object
-    finish_cart[i]['items'] = cart[i].item;
-    finish_cart[i]['price'] = cart[i].price;
-    finish_cart[i]['quantity'] = cart[i].quantity;
-    finish_cart[i]['discount'] = discount;
-    finish_cart[i]['sum_with_sale'] = sum_with_sale; //if no sale, this sale-sum is equally to normal sum
-    finish_cart[i]['sum_without_sale'] = sum;
-    finish_cart[i]['sale_percentage'] = sale_percentage;
+    finish_cart[i]["items"] = cart[i].item;
+    finish_cart[i]["price"] = cart[i].price;
+    finish_cart[i]["quantity"] = cart[i].quantity;
+    finish_cart[i]["discount"] = discount;
+    finish_cart[i]["sum_with_sale"] = sum_with_sale; //if no sale, this sale-sum is equally to normal sum
+    finish_cart[i]["sum_without_sale"] = sum;
+    finish_cart[i]["sale_percentage"] = sale_percentage;
   }
 
   let total = 0;
   for (let i in finish_cart) {
     total += finish_cart[i].sum_with_sale;
   }
- return total;
+  debug_info(`INFO [--Exercise 13-]: Ouput: ${total}`);
+  return total;
 }
 
 // ---------------------------------------------------------------------
@@ -611,7 +620,29 @@ function cartTotal(cart) {
 // Numbers smaller than 2 are not prime. Use a while loop.
 //   isPrime(7) -> true,  isPrime(9) -> false
 // ---------------------------------------------------------------------
-function isPrime(n) {}
+function isPrime(n) {
+  if (!Number.isInteger(n)) {
+    debug_info("WARNING [--Exercise 14--]: NOT INT given");
+    return 0;
+  }
+
+  //counter how often division is with 0 rest
+  let counter = 0;
+  for (let i = 1; i <= n; i++) {
+    //divison with n an d each number to n
+    if (n % i == 0) {
+      counter++;
+    }
+  }
+
+  if (counter == 2) {
+    debug_info(`INFO [--Exercise 14-]: Input:${n} Prime: true`);
+    return true;
+  } else {
+    debug_info(`INFO [--Exercise 14-]: Input:${n} Prime: false`);
+    return false;
+  }
+}
 
 // ---------------------------------------------------------------------
 // Exercise 15: primesUpTo
@@ -619,7 +650,24 @@ function isPrime(n) {}
 // Call your function isPrime() from exercise 14.
 //   primesUpTo(10) -> [2, 3, 5, 7]
 // ---------------------------------------------------------------------
-function primesUpTo(n) {}
+function primesUpTo(n) {
+  if (!Number.isInteger(n)) {
+    debug_info("WARNING [--Exercise 15--]: NOT INT given");
+    return 0;
+  }
+
+  //declaration of primary array
+  const prime_array = [];
+
+  //run to number
+  for (let i = 1; i <= n; i++) {
+    if (isPrime(i)) {
+      prime_array.push(i);
+    }
+  }
+  debug_info(`INFO [--Exercise 14-]: Input:${n} Prime_array: ${prime_array}`);
+  return prime_array;
+}
 
 // ---------------------------------------------------------------------
 // Exercise 16: wordStatistics
@@ -698,10 +746,10 @@ function testExercise(title, fn, expectedType, cases) {
     try {
       actual = fn(...testCase.args);
     } catch (error) {
-        //show fails in development console
-        console.error(error); //i want to see the error massages in the console.
-      
-        messages.push(call + " crashed: " + error.message);
+      //show fails in development console
+      console.error(error); //i want to see the error massages in the console.
+
+      messages.push(call + " crashed: " + error.message);
       continue;
     }
 
