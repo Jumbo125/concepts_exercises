@@ -26,7 +26,7 @@
 // ---------------------------------------------------------------------
 
 /* ########## MY OWN DEBUGGING ## */
-const my_debug = true;
+const my_debug = false;
 
 function debug_info(exercise_txt) {
   if (my_debug) {
@@ -83,7 +83,7 @@ function dayName(dayNumber) {
     1: "Monday",
     2: "Tuesday",
     3: "Wednesday",
-    4: "Thuesday",
+    4: "Thursday",
     5: "Friday",
     6: "Saturday",
     7: "Sunday",
@@ -174,7 +174,7 @@ function countVowels(text) {
         sum_vowel += 1;
         break;
       default:
-        sun_vowel = 0;
+        break;
     }
   }
   debug_info("INFO [--Exercise 3--]: Count:" + sum_vowel);
@@ -241,32 +241,46 @@ function fizzBuzz(n) {
 //   isPalindrome("level") -> true
 // ---------------------------------------------------------------------
 function isPalindrome(word) {
-  //variable declaration
+  /* ############## Variant A ########### */
+
+  /* ##########################
+    //variable declaration
+      let new_word = "";
+      let counter = 0;
+      debug_info("INFO [--Exercise 5--]: INPUT: " + word);
+
+      if (typeof word !== "string") {
+        debug_info("WARNING [--Exercise 5--]: : no string");
+        return false;
+      }
+
+      //Idea -> runs the loop reverse
+      counter = word.length - 1;
+      while (counter >= 0) {
+        debug_info("INFO [--Exercise 5--]: Counter: " + counter);
+        new_word += word[counter];
+        counter--;
+      }
+
+      debug_info(
+        `INFO [--Exercise 5--]: ORIGINAL WORD: ${word}, NEW WORD: ${new_word}`,
+      );
+      if (word === new_word) {
+        return true;
+      } else {
+        return false;
+      } ########## */
+
+  /* ############## Variant B ########### */
   let new_word = "";
-  let counter = 0;
-  debug_info("INFO [--Exercise 5--]: INPUT: " + word);
+  let counter = word.length - 1;
 
-  if (typeof word !== "string") {
-    debug_info("WARNING [--Exercise 5--]: : no string");
-    return false;
-  }
-
-  //Idea -> runs the loop reverse
-  counter = word.length - 1;
   while (counter >= 0) {
-    debug_info("INFO [--Exercise 5--]: Counter: " + counter);
     new_word += word[counter];
     counter--;
   }
 
-  debug_info(
-    `INFO [--Exercise 5--]: ORIGINAL WORD: ${word}, NEW WORD: ${new_word}`,
-  );
-  if (word === new_word) {
-    return true;
-  } else {
-    return false;
-  }
+  return word === new_word;
 }
 
 // ---------------------------------------------------------------------
@@ -342,7 +356,7 @@ function countWeekendDays(dayNumbers) {
 function pointsToGrade(points) {
   let grade = 0;
   //check if number, include dot numbers (isNaN insteand of Number.Integer)
-  if (isNaN(points)) {
+  if (!Number.isInteger(points)) {
     debug_info("WARNING [--Exercise 8--]: No number is given");
     return grade;
   }
@@ -399,7 +413,7 @@ function gradeReport(student) {
     return fail_str;
   }
 
-  if ("name" in student === false || "points" in student === "false") {
+  if ("name" in student === false || "points" in student === false) {
     debug_info("WARNING [--Exercise 9--]: Parameters in Objects are missing");
     return fail_str;
   }
@@ -521,7 +535,9 @@ function findOldest(people) {
   }
 
   //use sort function, to sort the obj, b.age - a.age means DESC, a.age - b.age menas ASC
-  const people_sort = people.sort((a, b) => b.age - a.age);
+  const people_tmp = people.slice(); // create a temporary array, to save the original array
+  // forogt this crazy solution in js, because the new array is only just another referenz. in PHP will be create a new array, without refernze in later time to the original
+  const people_sort = people_tmp.sort((a, b) => b.age - a.age);
   debug_info(`INFO [--Exercise 11-]: Output: ${JSON.stringify(people_sort)}`);
   return people_sort[0].name;
 }
@@ -628,11 +644,21 @@ function isPrime(n) {
 
   //counter how often division is with 0 rest
   let counter = 0;
+  /* ############# Variante A #########
   for (let i = 1; i <= n; i++) {
     //divison with n an d each number to n
     if (n % i == 0) {
       counter++;
     }
+  }*/
+
+  /* ############# Variante B #########*/
+  let i = 0;
+  while (i <= n) {
+    if (n % i === 0) {
+      counter++;
+    }
+    i++;
   }
 
   if (counter == 2) {
@@ -680,15 +706,13 @@ function primesUpTo(n) {
 //     -> { wordCount: 4, longestWord: "quick" }
 // ---------------------------------------------------------------------
 function wordStatistics(sentence) {
-  
-    debug_info(`INFO [--Exercise 16-]: Input:${sentence}`);
+  debug_info(`INFO [--Exercise 16-]: Input:${sentence}`);
 
   if (typeof sentence !== "string") {
     debug_info("WARNING [--Exercise 16--]: no string given");
     return ["no string given"];
   }
 
-  
   //declaration of return obj
   let sentence_obj = {};
   sentence_obj = { wordCount: 0, longestWord: "" };
