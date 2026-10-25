@@ -550,7 +550,6 @@ if (typeof people !== "object") {
         name_array.push(people_name);
       }
     }
-    alert(name_array);
   return name_array;
 
 
@@ -563,7 +562,43 @@ if (typeof people !== "object") {
 // 10 or more, that item gets 10% discount.
 //   cartTotal([{ item: "Pen", price: 2, quantity: 10 }]) -> 18
 // ---------------------------------------------------------------------
-function cartTotal(cart) {}
+function cartTotal(cart) {
+
+  if (typeof cart !== "object") {
+    debug_info("WARNING [--Exercise 13--]: No object is given");
+    //no array, return false
+    return "wrong typ of input";
+  }
+  if (Object.keys(cart).length === 0) {
+    return [];
+  }
+//declaration
+  let finish_cart = new Object;
+  
+//check each product
+  for (let i = 0; i < Object.keys(cart).length; i++){
+    let discount = false
+    let sale_percentage = 0;
+    const sum = cart[i].price * cart[i].price;
+    if (sum > 10){
+      discount = true;
+      sale_percentage = 0.1;
+     }
+    
+    const price_with_sale = Math.round((sum - (sum*sale_percentage))*100) / 100;
+    console.log("t" + finish_cart);
+    finish_cart[i].item = cart[i].item;
+    finish_cart[i].price = cart[i].price;
+    finish_cart[i].quantity = cart[i].quantity;
+    finish_cart[i].discount = discount;
+    finish_cart[i].price_with_sale = sum;
+    finish_cart[i].price_with_sale = price_with_sale;
+    finish_cart[i].sale_percentage = sale_percentage;
+  }
+  
+  
+
+}
 
 // ---------------------------------------------------------------------
 // Exercise 14: isPrime
@@ -658,7 +693,10 @@ function testExercise(title, fn, expectedType, cases) {
     try {
       actual = fn(...testCase.args);
     } catch (error) {
-      messages.push(call + " crashed: " + error.message);
+        //show fails in development console
+        console.error(error); //i want to see the error massages in the console.
+      
+        messages.push(call + " crashed: " + error.message);
       continue;
     }
 
